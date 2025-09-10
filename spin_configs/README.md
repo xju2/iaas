@@ -2,6 +2,8 @@
 Here are step-by-step instructions to deploy Inference as a Service (Iaas) on the Spin cluster at NERSC. Please follow these instructions *in order*.
 
 ### Envoy Proxy Deployment
+
+#### Steps
 * Got to the Rancher UI: https://rancher2.spin.nersc.gov/
 * Select the cluster: "production" or "development".
 * Create a new namespace, if not already created, e.g., `iaas-gnn4itk`.
@@ -9,6 +11,7 @@ Here are step-by-step instructions to deploy Inference as a Service (Iaas) on th
 * Click on "Create" in the top upper right corner.
 * An example YAML file can be found [here](1.0-envoy-proxy/envoy-proxy.yaml).
 
+#### Explanation
 This deployment does the following things:
 * It uses `envoyproxy/envoy:v1.34.7` as the container image.
 * It mounts a directory `/global/cfs/cdirs/m2845/atlas-spin` at the CFS file system at NERSC to `/envoy-config` in the container.
