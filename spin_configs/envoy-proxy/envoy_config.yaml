@@ -1,0 +1,66 @@
+node:
+  cluster: test-cluster
+  id: test-id
+
+admin:
+  address:
+    socket_address:
+      protocol: TCP
+      address: 0.0.0.0
+      port_value: 9191
+
+static_resources:
+  clusters:
+  - name: discoveryservice
+    connect_timeout: 10s
+    type: EDS
+    eds_cluster_config:
+      service_name: discoveryservice
+      eds_config:
+        path: "/envoy-config/envoy_eds.yaml"
+    lb_policy: ROUND_ROBIN
+    # Allow larger gRPC/HTTP2 payloads
+    http2_protocol_options: {}
+  listeners:
+  - name: listener_0
+    address:
+      socket_address:
+        address: 0.0.0.0
+        port_value: 9097
+    filter_chains:
+    - filters:
+      - name: envoy.filters.network.http_connection_manager
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+          stat_prefix: tcp_proxy
+          http2_protocol_options: {}
+          route_config:
+            name: cluster-route
+            validate_clusters: false
+            virtual_hosts:
+              - name: cluster
+                domains: ["*"]
+                routes:
+                  - match:
+                      prefix: "/"
+                      grpc: {}
+                    route:
+                      cluster: discoveryservice
+                      timeout: 300s
+
+          codec_type: AUTO
+          http_filters:
+          - name: envoy.filters.http.router
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+    per_connection_buffer_limit_bytes: 150000000
+
+dynamic_resources:
+  cds_config:
+    api_config_source:
+      transport_api_version: V3
+      refresh_delay: 5s
+      api_type: REST
+      cluster_names: [discoveryservice]
+
+
