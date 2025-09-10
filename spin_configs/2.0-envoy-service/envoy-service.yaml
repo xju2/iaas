@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    nersc.gov/clustername: production
+    nersc.gov/collab_uids: ''
+    nersc.gov/gid: '76739'
+    nersc.gov/gids: >-
+      4871,53006,57596,72330,76739,49584,78767,78781,81765,74560,95991,96414,103452,103453,110987
+    nersc.gov/roles: user
+    nersc.gov/serveralias: svc
+    nersc.gov/uid: '76739'
+    nersc.gov/username: xju
+  creationTimestamp: '2025-09-09T05:48:45Z'
+  managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":9097,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+            k:{"port":9191,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: agent
+      operation: Update
+      time: '2025-09-10T06:07:56Z'
+  name: envoy-service
+  namespace: iaas-gnn4itk
+  resourceVersion: '1007624163'
+  uid: 7f702770-9e7a-4163-a66e-3395b7c2fd49
+spec:
+  clusterIP: 10.43.155.134
+  clusterIPs:
+    - 10.43.155.134
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - name: grpc
+      port: 9097
+      protocol: TCP
+      targetPort: 9097
+    - name: admin
+      port: 9191
+      protocol: TCP
+      targetPort: 9191
+  selector:
+    workload.user.cattle.io/workloadselector: apps.deployment-iaas-gnn4itk-envoy-proxy
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
