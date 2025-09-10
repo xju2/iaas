@@ -16,11 +16,14 @@ This service does the following things:
 * It listens on port `9097` and forwards the traffic to the Envoy proxy deployment on the same port through a selector: `workload.user.cattle.io/workloadselector: apps.deployment-iaas-gnn4itk-envoy-proxy`, which can be found in the deployment yaml file above.
 
 ### Ingress and TLS
-The ingress and SSL/TLS configuration is handled by `https://github.com/dingp/spin-acme`. Follow the instructions in the repository. An example of modified values can be found [here](3.0-ingress/values-local.yaml).
+The ingress and SSL/TLS configuration is handled by `https://github.com/dingp/spin-acme`. Follow the **Case 2** instructions in the repository. An example of modified values can be found [here](3.0-ingress/values-local.yaml).
 
 > [!NOTE]
 > The IaaS does not have a web server running on port 80, which is required for the ACME HTTP-01 challenge.
 > Therefore, the `spin-acme` creates a dummy web server deployment and service to handle the challenge so as to obtain the SSL/TLS certificates.
+
+After you have successfully obtained the certificates, you can check the Secrets in the Storage section of the Rancher UI, named _tls-cert_. In the Data section, it should show something like "Domain Name iaasdemo.ml4phys.com
+Expires: Mon, Dec 8 2025  8:26:51 pm"
 
 You will have to modify the Ingress so that it points to the Envoy service. An example can be found [here](3.0-ingress/ingress.yaml).
 
