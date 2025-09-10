@@ -11,6 +11,11 @@ Here are step-by-step instructions to deploy Inference as a Service (Iaas) on th
 * Click on "Create" in the top upper right corner.
 * An example YAML file can be found [here](1.0-envoy-proxy/envoy-proxy.yaml).
 
+> [!DANGER]
+> It's a bit of tricky to mount the configuration file from the CFS file system at NERSC to the container because the permission.
+> In the *securityContext* section, I set `fsGroup`, `runAsGroup`, and `runAsUser` to my own NERSC user ID so is the directory permission.
+> Somehow, a folder immediately after project directory (e.g., `/global/cfs/cdirs/m2845/atlas-spin`) works well, but a folder deeper (e.g., `/global/cfs/cdirs/m2845/atlas-spin/some-folder`) does not work.
+
 #### Explanation
 This deployment does the following things:
 * It uses `envoyproxy/envoy:v1.34.7` as the container image.
