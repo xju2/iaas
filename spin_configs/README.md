@@ -22,6 +22,14 @@ The Triton Server address is hardcoded in the [envoy_esd.yaml](1.0-envoy-proxy/e
 
 
 ### Envoy Service
+
+#### Steps
+* Go to "Service Discovery" section and click on "Services".
+* Click on "Create" in the top upper right corner.
+* An example YAML file can be found [here](2.0-envoy-service/envoy-service.yaml).
+
+
+#### Explanation
 This service does the following things:
 * It creates a _clusterIP_ type service that exposes the Envoy proxy deployment.
 * It listens on port `9097` and forwards the traffic to the Envoy proxy deployment on the same port through a selector: `workload.user.cattle.io/workloadselector: apps.deployment-iaas-gnn4itk-envoy-proxy`, which can be found in the deployment yaml file above.
@@ -36,7 +44,13 @@ The ingress and SSL/TLS configuration is handled by `https://github.com/dingp/sp
 After you have successfully obtained the certificates, you can check the Secrets in the Storage section of the Rancher UI, named _tls-cert_. In the Data section, it should show something like "Domain Name iaasdemo.ml4phys.com
 Expires: Mon, Dec 8 2025  8:26:51 pm"
 
-You will have to modify the Ingress so that it points to the Envoy service. An example can be found [here](3.0-ingress/ingress.yaml).
+You will have to modify the Ingress so that it points to the Envoy service.
+
+#### Steps
+* Go to "Service Discovery" section and click on "Ingresses".
+* In the row of the `ingress` created by `spin-acme`, click on the three dots on the right end and select "Edit YAML".
+* An example can be found [here](3.0-ingress/ingress.yaml).
+
 
 > [!IMPORTANT]
 > The Ingress assumes the Triton client uses the `gPRC` protocol. If your client uses HTTP/REST, you will have to update the Ingress.
