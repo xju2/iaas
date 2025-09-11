@@ -20,9 +20,15 @@ static_resources:
         path_config_source:
           path: "/envoy-config/envoy_eds.yaml"
           watched_directory: {"path": "/envoy-config"}
-    lb_policy: ROUND_ROBIN
+    lb_policy: LEAST_REQUEST
     # Allow larger gRPC/HTTP2 payloads
     http2_protocol_options: {}
+    outlier_detection:
+      consecutive_5xx: 5
+      interval: 10s
+      base_ejection_time: 30s
+      max_ejection_percent: 50
+      enforcing_consecutive_5xx: 100
   listeners:
   - name: listener_0
     address:

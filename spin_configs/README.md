@@ -62,3 +62,20 @@ You will have to modify the Ingress so that it points to the Envoy service.
 
 
 
+## My Notes.
+
+### Optimize Envoy
+* Increase worker threads (--concurrency flag in Envoy = cores by default).
+* Adjust buffer sizes and keepalive to avoid churn. Example cluster tuning:
+    ```yaml
+    circuit_breakers:
+    thresholds:
+    - max_connections: 10000
+        max_pending_requests: 5000
+        max_requests: 10000
+        max_retries: 3
+    common_http_protocol_options:
+    idle_timeout: 300s
+    http2_protocol_options:
+    max_concurrent_streams: 10000
+    ```
