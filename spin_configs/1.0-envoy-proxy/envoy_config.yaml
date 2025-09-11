@@ -17,7 +17,9 @@ static_resources:
     eds_cluster_config:
       service_name: discoveryservice
       eds_config:
-        path: "/envoy-config/envoy_eds.yaml"
+        path_config_source:
+          path: "/envoy-config/envoy_eds.yaml"
+          watched_directory: {"path": "/envoy-config"}
     lb_policy: ROUND_ROBIN
     # Allow larger gRPC/HTTP2 payloads
     http2_protocol_options: {}
@@ -54,13 +56,4 @@ static_resources:
             typed_config:
               "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
     per_connection_buffer_limit_bytes: 150000000
-
-dynamic_resources:
-  cds_config:
-    api_config_source:
-      transport_api_version: V3
-      refresh_delay: 5s
-      api_type: REST
-      cluster_names: [discoveryservice]
-
 
