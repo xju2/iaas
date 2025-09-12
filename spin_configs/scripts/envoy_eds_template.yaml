@@ -1,0 +1,11 @@
+fsfsaiofhsafversion_info: '0'
+resources:
+- "@type": type.googleapis.com/envoy.config.endpoint.v3.ClusterLoadAssignment
+  cluster_name: discoveryservice
+  endpoints:
+  - lb_endpoints:
+    - endpoint:
+        address:
+          socket_address:
+            address: <TRITON_IP_ADDRESS>
+            port_value: 8001

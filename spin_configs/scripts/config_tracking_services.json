@@ -1,0 +1,22 @@
+{
+  "total_hours": 48,
+  "srun_command": [
+    "srun",
+    "-C", "gpu",
+    "-q", "interactive",
+    "-N", "1",
+    "-c", "32",
+    "-t", "4:00:00",
+    "-A", "m3443",
+    "--ntasks-per-node=1",
+    "--gpus-per-task=1",
+    "--gpu-bind=none",
+    "-G", "1"
+  ],
+  "train_command": [
+    "fundra_train_multigpu",
+    "-f", "src/fundra/configs/resolved/vqvae/v0.6.2.yaml",
+    "-c", "trainer.devices=1 trainer.num_nodes=1"
+  ],
+  "job_name": "triton"
+}
