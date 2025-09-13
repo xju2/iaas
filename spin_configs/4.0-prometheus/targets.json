@@ -1,0 +1,9 @@
+[
+  {
+    "targets": ["128.55.82.226:8002"],
+    "labels": {
+      "job": "triton",
+      "server": "triton-server-1"
+    }
+  }
+]

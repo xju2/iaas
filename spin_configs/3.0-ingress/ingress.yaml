@@ -3,11 +3,9 @@ kind: Ingress
 metadata:
   annotations:
     field.cattle.io/publicEndpoints: >-
-      [{"addresses":["128.55.206.106"],"port":443,"protocol":"HTTPS","serviceName":"iaas-gnn4itk:envoy-service","ingressName":"iaas-gnn4itk:ingress","hostname":"iaasdemo.ml4phys.com","path":"/","allNodes":true},{"addresses":["128.55.206.106"],"port":443,"protocol":"HTTPS","serviceName":"iaas-gnn4itk:envoy-service","ingressName":"iaas-gnn4itk:ingress","hostname":"ingress.iaas-gnn4itk.production.svc.spin.nersc.org","path":"/","allNodes":true}]
+      [{"addresses":["128.55.206.107"],"port":443,"protocol":"HTTPS","serviceName":"iaas-gnn4itk:envoy-service","ingressName":"iaas-gnn4itk:ingress","hostname":"iaasdemo.ml4phys.com","path":"/","allNodes":true},{"addresses":["128.55.206.107"],"port":443,"protocol":"HTTPS","serviceName":"iaas-gnn4itk:envoy-service","ingressName":"iaas-gnn4itk:ingress","hostname":"ingress.iaas-gnn4itk.production.svc.spin.nersc.org","path":"/","allNodes":true},{"addresses":["128.55.206.107"],"port":443,"protocol":"HTTPS","serviceName":"iaas-gnn4itk:grafana","ingressName":"iaas-gnn4itk:ingress","hostname":"iaasdemo.ml4phys.com","path":"/grafana","allNodes":true},{"addresses":["128.55.206.107"],"port":443,"protocol":"HTTPS","serviceName":"iaas-gnn4itk:grafana","ingressName":"iaas-gnn4itk:ingress","hostname":"ingress.iaas-gnn4itk.production.svc.spin.nersc.org","path":"/grafana","allNodes":true}]
     kubectl.kubernetes.io/last-applied-configuration: >
-      {"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"annotations":{},"name":"ingress","namespace":"iaas-gnn4itk"},"spec":{"ingressClassName":"nginx","rules":[{"host":"iaasdemo.ml4phys.com","http":{"paths":[{"backend":{"service":{"name":"demov1-spin-acme-websrv","port":{"number":8080}}},"path":"/","pathType":"Prefix"}]}},{"host":"ingress.iaas-gnn4itk.production.svc.spin.nersc.org","http":{"paths":[{"backend":{"service":{"name":"demov1-spin-acme-websrv","port":{"number":8080}}},"path":"/","pathType":"Prefix"}]}}],"tls":[{"hosts":["iaasdemo.ml4phys.com","ingress.iaas-gnn4itk.production.svc.spin.nersc.org"],"secretName":"tls-cert"}]}}
-    meta.helm.sh/release-name: demov1
-    meta.helm.sh/release-namespace: iaas-gnn4itk
+      {"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"annotations":{},"name":"ingress","namespace":"iaas-gnn4itk"},"spec":{"ingressClassName":"nginx","rules":[{"host":"iaasdemo.ml4phys.com","http":{"paths":[{"backend":{"service":{"name":"demov1-spin-acme-websrv","port":{"number":8080}}},"path":"/","pathType":"Prefix"}]}},{"host":"ingress.iaas-gnn4itk.production.svc.spin.nersc.org","http":{"paths":[{"backend":{"service":{"name":"demov1-spin-acme-websrv","port":{"number":8080}}},"path":"/","pathType":"Prefix"}]}}]}}
     nersc.gov/clustername: production
     nersc.gov/collab_uids: ''
     nersc.gov/gid: '76739'
@@ -19,14 +17,8 @@ metadata:
     nersc.gov/username: xju
     nginx.ingress.kubernetes.io/backend-protocol: GRPC
     nginx.ingress.kubernetes.io/proxy-body-size: 100m
-  creationTimestamp: '2025-09-10T05:15:07Z'
-  generation: 4
-  labels:
-    app.kubernetes.io/instance: demov1
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: spin-acme
-    app.kubernetes.io/version: 1.16.0
-    helm.sh/chart: spin-acme-0.1.0
+  creationTimestamp: '2025-09-12T16:44:25Z'
+  generation: 3
   managedFields:
     - apiVersion: networking.k8s.io/v1
       fieldsType: FieldsV1
@@ -34,20 +26,12 @@ metadata:
         f:metadata:
           f:annotations:
             .: {}
-            f:meta.helm.sh/release-name: {}
-            f:meta.helm.sh/release-namespace: {}
-          f:labels:
-            .: {}
-            f:app.kubernetes.io/instance: {}
-            f:app.kubernetes.io/managed-by: {}
-            f:app.kubernetes.io/name: {}
-            f:app.kubernetes.io/version: {}
-            f:helm.sh/chart: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
         f:spec:
           f:ingressClassName: {}
-      manager: helm
+      manager: kubectl-client-side-apply
       operation: Update
-      time: '2025-09-10T05:15:06Z'
+      time: '2025-09-12T16:44:24Z'
     - apiVersion: networking.k8s.io/v1
       fieldsType: FieldsV1
       fieldsV1:
@@ -57,35 +41,23 @@ metadata:
       manager: nginx-ingress-controller
       operation: Update
       subresource: status
-      time: '2025-09-10T05:15:31Z'
-    - apiVersion: networking.k8s.io/v1
-      fieldsType: FieldsV1
-      fieldsV1:
-        f:metadata:
-          f:annotations:
-            f:kubectl.kubernetes.io/last-applied-configuration: {}
-        f:spec:
-          f:tls: {}
-      manager: kubectl-client-side-apply
-      operation: Update
-      time: '2025-09-10T05:25:24Z'
+      time: '2025-09-12T16:54:58Z'
     - apiVersion: networking.k8s.io/v1
       fieldsType: FieldsV1
       fieldsV1:
         f:metadata:
           f:annotations:
             f:field.cattle.io/publicEndpoints: {}
-            f:nginx.ingress.kubernetes.io/backend-protocol: {}
-            f:nginx.ingress.kubernetes.io/proxy-body-size: {}
         f:spec:
           f:rules: {}
+          f:tls: {}
       manager: agent
       operation: Update
-      time: '2025-09-10T06:32:15Z'
+      time: '2025-09-12T16:56:21Z'
   name: ingress
   namespace: iaas-gnn4itk
-  resourceVersion: '1007634205'
-  uid: 9a9f0a94-3893-4862-889b-5cb45ee92c49
+  resourceVersion: '1009275556'
+  uid: c5ff2c13-2d14-462a-afb2-0e7a871bc296
 spec:
   ingressClassName: nginx
   rules:
@@ -99,6 +71,13 @@ spec:
                   number: 9097
             path: /
             pathType: Prefix
+          - backend:
+              service:
+                name: grafana
+                port:
+                  number: 3000
+            path: /grafana
+            pathType: Prefix
     - host: ingress.iaas-gnn4itk.production.svc.spin.nersc.org
       http:
         paths:
@@ -109,19 +88,15 @@ spec:
                   number: 9097
             path: /
             pathType: Prefix
+          - backend:
+              service:
+                name: grafana
+                port:
+                  number: 3000
+            path: /grafana
+            pathType: Prefix
   tls:
     - hosts:
         - iaasdemo.ml4phys.com
         - ingress.iaas-gnn4itk.production.svc.spin.nersc.org
       secretName: tls-cert
-status:
-  loadBalancer:
-    ingress:
-      - ip: 128.55.206.106
-      - ip: 128.55.206.107
-      - ip: 128.55.206.108
-      - ip: 128.55.206.109
-      - ip: 128.55.206.110
-      - ip: 128.55.206.111
-      - ip: 128.55.206.112
-      - ip: 128.55.206.113

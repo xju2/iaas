@@ -22,27 +22,11 @@ rule_files:
 scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
   - job_name: envoy
-    metric_path: /stats/prometheus
+    metrics_path: /stats/prometheus
     static_configs:
       - targets: ['envoy-service.iaas-gnn4itk.svc.cluster.local:9191']
 
-  - job_name: "prometheus"
+  - job_name: "triton"
     file_sd_configs:
       - files:
         - '/prometheus/targets.json'
-
-    # metrics_path defaults to '/metrics'
-    # scheme defaults to 'http'.
-
-    static_configs:
-      - targets: ["localhost:9090"]
-       # The label name is added as a label `label_name=<label_value>` to any timeseries scraped from this config.
-        labels:
-          app: "prometheus"
-
-    http_sd_configs:
-        - url: "http://envoy-service.iaas-gnn4itk.svc.cluster.local:8080/targets"
-          refresh_interval: 30s
-          authorization:
-              type: Bearer
-              credentials: http_sd_api_key
