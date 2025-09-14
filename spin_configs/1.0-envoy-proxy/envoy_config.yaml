@@ -29,6 +29,14 @@ static_resources:
       base_ejection_time: 30s
       max_ejection_percent: 50
       enforcing_consecutive_5xx: 100
+
+    circuit_breakers:
+      thresholds:
+      - max_connections: 500
+        max_pending_requests: 200
+        max_requests: 1000
+        max_retries: 3
+
   listeners:
   - name: listener_0
     address:
@@ -57,7 +65,7 @@ static_resources:
                       timeout: 600s
                       idle_timeout: 0s
                       retry_policy:
-                        retry_on: "5xx,reset,gateway-error"  # types of failures to retry
+                        retry_on: "5xx,reset,gateway-error,cancelled,resource-exhausted,unavailable"  # types of failures to retry
                         num_retries: 3                      # max retries per request
                         per_try_timeout: 300s                # optional: timeout per retry attempt
 
