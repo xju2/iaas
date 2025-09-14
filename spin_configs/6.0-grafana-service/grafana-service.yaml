@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    nersc.gov/clustername: production
+    nersc.gov/collab_uids: ''
+    nersc.gov/gid: '76739'
+    nersc.gov/gids: >-
+      4871,53006,57596,72330,76739,49584,78767,78781,81765,74560,95991,96414,103452,103453,110987
+    nersc.gov/roles: user
+    nersc.gov/serveralias: svc
+    nersc.gov/uid: '76739'
+    nersc.gov/username: xju
+  creationTimestamp: '2025-09-12T05:50:10Z'
+  managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:internalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":3000,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: agent
+      operation: Update
+      time: '2025-09-12T05:50:09Z'
+  name: grafana
+  namespace: iaas-gnn4itk
+  resourceVersion: '1008902673'
+  uid: 098e7a8d-70f0-47f6-b2eb-f0dcd1143818
+spec:
+  clusterIP: 10.43.57.70
+  clusterIPs:
+    - 10.43.57.70
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - name: portal
+      port: 3000
+      protocol: TCP
+      targetPort: 3000
+  selector:
+    workload.user.cattle.io/workloadselector: apps.deployment-iaas-gnn4itk-grafana
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
